@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>22</title>
+</head>
+<body>
+    <h1>21</h1>
+    <div class="campus">
+         {% for cluster in ["hy", "ca"] %}
+            <div class="cluster">
+                {% for place in range(1, 9) %}
+                    <div class="row">
+                        {% for row in ["a", "b", "c"] %}
+                            {% if workspace['{{cluster}}-{{row}}{{place}}'] == None %}
+                                <div class="seat">{{cluster}}-{{row}}{{place}}</div>
+                            {% else %}
+                                <div class="selected">{{cluster}}-{{row}}{{place}}</div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+<!--        document.querySelectorAll('.seat').forEach(seat => {-->
+<!--            seat.addEventListener('click', () => {-->
+<!--                seat.classList.toggle('selected');-->
+<!--            });-->
+<!--        });-->
+
+
+    </script>
+</body>
+</html>

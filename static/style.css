@@ -1,0 +1,29 @@
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 50px;
+}
+
+.cluster {
+    display: inline-block;
+    border: 2px solid #333;
+    padding: 10px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.seat.selected {
+    background-color: #4CAF50;
+    border: 1px solid #333;
+}
