@@ -20,6 +20,11 @@ def db():
 
 
 def json_open(file_json):
+    # Подключение к БД
+    con = sqlite3.connect("data/workspace.db")
+    # Создание курсора
+    cur = con.cursor()
+
     # открытие .json
     with open(file_json, encoding="UTF-8") as json_file:
         records = json.load(json_file)
@@ -28,25 +33,34 @@ def json_open(file_json):
     login = records["login"]
     place = records["place"]
 
-    # Подключение к БД
-    con = sqlite3.connect("data/workspace.db")
-    # Создание курсора
-    cur = con.cursor()
+    places_db = cur.execute("""SELECT place FROM workspace""").fetchall()
+
+    if place not in places_db:
+        return False
 
     # добавление записи в базу данных
     cur.execute(f'''UPDATE workspace SET login = '{login}' WHERE place = '{place}' ''')
     con.commit()
 
-    return login, place
 
+def check_login(search_login):
+    con = sqlite3.connect("data/workspace.db")
+    # Создание курсора
+    cur = con.cursor()
+
+    # добавление записи в базу данных
+    result_db = cur.execute("""SELECT login FROM workspace""").fetchall()
+    if (search_login,) in result_db:
+        return True
+    return False
 
 # # Подключение к БД
 # con = sqlite3.connect("workspace.db")
 # # Создание курсора
 # cur = con.cursor()
-# for s in ['hy', 'ca']:
-#     for i in range(1, 10):
-#         for j in ["a", "b", "c", "d", "f", "g", "h"]:
+# for s in ['su']:
+#     for i in range(1, 4):
+#         for j in ["e", "f"]:
 #             # добавление записи в базу данных
 #             cur.execute(f''' INSERT INTO workspace (place, login) VALUES("{s}-{j}{i}", "empty") ''')
 #             con.commit()

@@ -8,6 +8,10 @@
 </head>
 <body>
     <h1>21</h1>
+    <form action="/" method="POST">
+        <input type="text" name="query" placeholder="Enter search query">
+        <button type="submit">Search</button>
+    </form>
     <!-- создание поля с местами -->
     <div class="campus">
          {% for cluster in ["hy", "ca"] %}
@@ -21,10 +25,17 @@
                                 {{ place_id }}
                             </div>
                         {% else %}
+                        {% if workspace[place_id] == query %}
+                            <div class="selected_search">
+                                <a href="#login_place">{{ place_id }}</a>
+                                {{ workspace[place_id] }}
+                            </div>
+                        {% else %}
                             <div class="selected">
                                 <a href="#login_place">{{ place_id }}</a>
                                 {{ workspace[place_id] }}
                             </div>
+                        {% endif %}
                         {% endif %}
                         {% endfor %}
                     </div>
