@@ -8,31 +8,29 @@
 </head>
 <body>
     <h1>21</h1>
+    <!-- создание поля с местами -->
     <div class="campus">
          {% for cluster in ["hy", "ca"] %}
             <div class="cluster">
-                {% for place in range(1, 9) %}
+                {% for place in range(1, 10) %}
                     <div class="row">
-                        {% for row in ["a", "b", "c"] %}
-                            {% if workspace['{{cluster}}-{{row}}{{place}}'] == None %}
-                                <div class="seat">{{cluster}}-{{row}}{{place}}</div>
-                            {% else %}
-                                <div class="selected">{{cluster}}-{{row}}{{place}}</div>
-                            {% endif %}
+                        {% for row in ["a", "b", "c", "d", "f", "g", "h"] %}
+                        {% set place_id = "".join([cluster ,'-' ,row , place|string]) %}
+                        {% if workspace[place_id] == "empty" %}
+                            <div class="seat">
+                                {{ place_id }}
+                            </div>
+                        {% else %}
+                            <div class="selected">
+                                <a href="#login_place">{{ place_id }}</a>
+                                {{ workspace[place_id] }}
+                            </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 {% endfor %}
             </div>
         {% endfor %}
     </div>
-    <script>
-<!--        document.querySelectorAll('.seat').forEach(seat => {-->
-<!--            seat.addEventListener('click', () => {-->
-<!--                seat.classList.toggle('selected');-->
-<!--            });-->
-<!--        });-->
-
-
-    </script>
 </body>
 </html>

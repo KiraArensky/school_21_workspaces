@@ -23,7 +23,11 @@ body {
     cursor: pointer;
 }
 
-.seat.selected {
+.selected {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
     background-color: #4CAF50;
     border: 1px solid #333;
+    cursor: pointer;
 }

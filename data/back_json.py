@@ -1,10 +1,22 @@
-import requests
 import json
 import sqlite3
 
 
-# url = 'http://muslimsalat.com/daily.json'
-# response = requests.get(url)
+def db():
+    # подключение к базам данных
+    con = sqlite3.connect("data/workspace.db")
+    # Создание курсора
+    cur = con.cursor()
+
+    # запрос всех данных из базы данных
+    result_db = cur.execute("""SELECT * FROM workspace""").fetchall()
+
+    # создание словаря с ключами места и значением логина
+    json_output = {}
+    for i in result_db:
+        json_output[i[0]] = i[1]
+
+    return json_output
 
 
 def json_open(file_json):
@@ -22,19 +34,19 @@ def json_open(file_json):
     cur = con.cursor()
 
     # добавление записи в базу данных
-    cur.execute(f'''INSERT INTO workspace (login) VALUES("{login}") ''')
+    cur.execute(f'''UPDATE workspace SET login = '{login}' WHERE place = '{place}' ''')
     con.commit()
 
     return login, place
 
-#
+
 # # Подключение к БД
 # con = sqlite3.connect("workspace.db")
 # # Создание курсора
 # cur = con.cursor()
 # for s in ['hy', 'ca']:
-#     for i in range(1, 9):
-#         for j in ["a", "b", "c"]:
+#     for i in range(1, 10):
+#         for j in ["a", "b", "c", "d", "f", "g", "h"]:
 #             # добавление записи в базу данных
 #             cur.execute(f''' INSERT INTO workspace (place, login) VALUES("{s}-{j}{i}", "empty") ''')
 #             con.commit()
