@@ -54,13 +54,10 @@
                             </div>
                         {% else %}
                         {% if workspace[place_id] == query %}
-                        <button onclick="alert({{workspace[place_id]}})" class="selected_search">
-                        <a>{{ place_id[4:] }}</a>
-                        </button>
+                                <button class="selected_search" id={{place_id}} оnclick="myFunction()">{{ place_id[4:] }}</button>
+
                         {% else %}
-                        <button onclick="alert({{workspace[place_id]}})" class="selected">
-                        <a>{{ place_id[4:] }}</a>
-                        </button>
+                                <button class="selected" id={{place_id}} оnclick="myFunction()">{{ place_id[4:] }}</button>
                         {% endif %}
                         {% endif %}
                         {% endfor %}
@@ -93,13 +90,10 @@
                             </div>
                         {% else %}
                         {% if workspace[place_id] == query %}
-                        <button onclick="alert({{workspace[place_id]}})" class="selected_search">
-                        <a>{{ place_id[4:] }}</a>
-                        </button>
+                                <button class="selected_search" id={{place_id}}>{{ place_id[4:] }}</button>
+
                         {% else %}
-                        <button onclick="alert({{workspace[place_id]}})" class="selected">
-                        <a>{{ place_id[4:] }}</a>
-                        </button>
+                                <button class="selected" id={{place_id}}>{{ place_id[4:] }}</button>
                         {% endif %}
                         {% endif %}
                         {% endfor %}
@@ -107,5 +101,15 @@
                 {% endfor %}
             </div>
     </div>
+    <script>
+const items = document.querySelectorAll('.seat');
+
+items.forEach(item => {
+  item.addEventListener('click', function() {
+    items.forEach(elem => elem.classList.remove('book'));
+    this.classList.add('book');
+  });
+});
+    </script>
 </body>
 </html>
