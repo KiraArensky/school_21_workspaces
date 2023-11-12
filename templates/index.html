@@ -8,6 +8,14 @@
     <title>Hedgehogs</title>
 </head>
 <body>
+    <header>
+        <nav class="container">
+            <img class="info" src="/static/images/info.svg" alt="info">
+            <img class="logo" src="/static/images/logo.png" alt="logo">
+            <img class="search" src="/static/images/search.svg" alt="search">
+        </nav>
+    </header>
+        <div class="stripe"></div>
     <h1>Workspace 21</h1>
     <br><br>
     <form action="/" method="POST">
@@ -17,12 +25,16 @@
     <br><br><br>
     <!-- создание поля с местами -->
     <div class="campus">
-         {% for cluster in ["hy", "ca"] %}
-            {{ cluster }} <br><br>
+        {% for cluster in ["hy", "ca"] %}
+        {% if cluster == "hy" %}
+        <a>HYDROGEN</a> <br><br>
+        {% else %}
+        <a>CARBON</a> <br><br>
+        {% endif %}
             <div class="cluster">
                 {% for row in ["a", "b", "c", "d", "f", "g", "h"] %}
                     <div class="row">
-                        <a>{{ row }}</a><br><br><br>
+                        <a class="bukovki">{{ row }}</a><br><br><br>
                         {% for place in range(1, 10) %}
                         {% set place_id = "".join([cluster, '-', row, place|string]) %}
                         {% if place_id not in workspace %}
@@ -30,23 +42,25 @@
                             </div>
                         {% elif book[place_id] != "empty_00" %}
                             <div class="book">
-                                {{ place_id[3:] }}
+                                {{ place_id[4:] }}
                             </div>
                         {% elif workspace[place_id] == "empty_00" %}
-                        <input class="seat" type="submit" name="free_place" value={{ place_id[3:] }}>
+                            <div class="seat">
+                                {{ place_id[4:] }}
+                            </div>
                         {% elif workspace[place_id] == "break_00" %}
                             <div class="break">
-                                {{ place_id[3:] }}
+                                {{ place_id[4:] }}
                             </div>
                         {% else %}
                         {% if workspace[place_id] == query %}
-                            <div class="selected_search">
-                                <a href="#main">{{ place_id[3:] }}</a>
-                            </div>
+                        <button onclick="alert({{workspace[place_id]}})" class="selected_search">
+                        <a>{{ place_id[4:] }}</a>
+                        </button>
                         {% else %}
-                            <div class="selected">
-                                <a href="#main" >{{ place_id[3:] }}</a>
-                            </div>
+                        <button onclick="alert({{workspace[place_id]}})" class="selected">
+                        <a>{{ place_id[4:] }}</a>
+                        </button>
                         {% endif %}
                         {% endif %}
                         {% endfor %}
@@ -55,11 +69,11 @@
             </div><br>
         {% endfor %}
         {% set cluster = "su" %}
-            {{ cluster }}<br><br>
+        <a>SULFUR</a> <br><br>
             <div class="cluster">
                 {% for row in ["a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "j"] %}
                     <div class="row">
-                        <a>{{ row }}</a><br><br><br>
+                        <a class="bukovki">{{ row }}</a><br><br><br>
                         {% for place in range(1, 7) %}
                         {% set place_id = "".join([cluster, '-', row, place|string]) %}
                         {% if place_id not in workspace %}
@@ -67,23 +81,25 @@
                             </div>
                         {% elif book[place_id] != "empty_00" %}
                             <div class="book">
-                                {{ place_id[3:] }}
+                                {{ place_id[4:] }}
                             </div>
                         {% elif workspace[place_id] == "empty_00" %}
-                        <input class="seat" type="submit" name="free_place" value={{ place_id[3:] }}>
+                            <div class="seat">
+                                {{ place_id[4:] }}
+                            </div>
                         {% elif workspace[place_id] == "break_00" %}
                             <div class="break">
-                                {{ place_id[3:] }}
+                                {{ place_id[4:] }}
                             </div>
                         {% else %}
                         {% if workspace[place_id] == query %}
-                            <div class="selected_search">
-                                <a href="#main">{{ place_id[3:] }}</a>
-                            </div>
+                        <button onclick="alert({{workspace[place_id]}})" class="selected_search">
+                        <a>{{ place_id[4:] }}</a>
+                        </button>
                         {% else %}
-                            <div class="selected">
-                                <a href="#main">{{ place_id[3:] }}</a>
-                            </div>
+                        <button onclick="alert({{workspace[place_id]}})" class="selected">
+                        <a>{{ place_id[4:] }}</a>
+                        </button>
                         {% endif %}
                         {% endif %}
                         {% endfor %}
@@ -91,10 +107,5 @@
                 {% endfor %}
             </div>
     </div>
-    <a href="" id="main">
-      <div id="okno">
-          {{ workspace[place_id] }}
-      </div>
-    </a>
 </body>
 </html>
