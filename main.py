@@ -8,25 +8,22 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
+    search_login = "empty_00"
     if request.method == 'GET':
-        json_output = db()
+        json_output, book_login = db()
         if open("db/login.json"):
             file_json = 'db/login.json'
-            if json_open(file_json) is False:
-                pass
-        search_login = "empty"
-        return render_template("index.html", workspace=json_output, query=search_login)
+            json_open(file_json)
+        return render_template("index.html", workspace=json_output, query=search_login, book=book_login)
     else:
         search_login = request.form['query']
-        json_output = db()
+        json_output, book_login = db()
         if open("db/login.json"):
             file_json = 'db/login.json'
             json_open(file_json)
             if check_login(search_login):
-                return render_template("index.html", workspace=json_output, query=search_login)
-        search_login = "empty"
-        return render_template("index.html", workspace=json_output, query=search_login)
-
+                return render_template("index.html", workspace=json_output, query=search_login, book=book_login)
+        return render_template("index.html", workspace=json_output, query=search_login, book=book_login)
 
 
 if __name__ == '__main__':

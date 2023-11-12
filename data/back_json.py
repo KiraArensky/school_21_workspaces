@@ -9,14 +9,21 @@ def db():
     cur = con.cursor()
 
     # запрос всех данных из базы данных
-    result_db = cur.execute("""SELECT * FROM workspace""").fetchall()
+    result_db = cur.execute("""SELECT place, login FROM workspace""").fetchall()
+
+    result_db_1 = cur.execute("""SELECT place, book_login FROM workspace""").fetchall()
 
     # создание словаря с ключами места и значением логина
     json_output = {}
     for i in result_db:
         json_output[i[0]] = i[1]
 
-    return json_output
+    # создание словаря с ключами места и значением забронированного логина
+    book_login = {}
+    for i in result_db_1:
+        book_login[i[0]] = i[1]
+
+    return json_output, book_login
 
 
 def json_open(file_json):
@@ -35,12 +42,10 @@ def json_open(file_json):
 
     places_db = cur.execute("""SELECT place FROM workspace""").fetchall()
 
-    if place not in places_db:
-        return False
-
-    # добавление записи в базу данных
-    cur.execute(f'''UPDATE workspace SET login = '{login}' WHERE place = '{place}' ''')
-    con.commit()
+    if place in places_db or len(login) == 8:
+        # добавление записи в базу данных
+        cur.execute(f'''UPDATE workspace SET login = '{login}' WHERE place = '{place}' ''')
+        con.commit()
 
 
 def check_login(search_login):

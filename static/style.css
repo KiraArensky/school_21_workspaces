@@ -5,38 +5,85 @@ body {
 }
 
 .cluster {
-    display: inline-block;
+    text-align: center;
     border: 2px solid #333;
-    padding: 10px;
+    padding: 20px;
 }
 
 .row {
+    text-align: center;
     display: flex;
     justify-content: center;
 }
 
 .seat {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     margin: 5px;
     border: 1px solid #333;
     cursor: pointer;
 }
 
 .selected {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     margin: 5px;
     background-color: #4CAF50;
     border: 1px solid #333;
-    cursor: pointer;
+}
+
+.break {
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    background-color: red;
+    border: 1px solid #333;
 }
 
 .selected_search {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     margin: 5px;
     background-color: yellow;
     border: 1px solid #333;
     cursor: pointer;
 }
+.none_seat{
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    cursor: pointer;
+}
+.book{
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    background-color: purple;
+    border: 1px solid #333;
+}
+
+      #main {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      #okno {
+        width: 300px;
+        height: 50px;
+        text-align: center;
+        padding: 15px;
+        border: 3px solid #0000cc;
+        border-radius: 10px;
+        color: #0000cc;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: white;
+      }
+      #main:target {display: block;}
